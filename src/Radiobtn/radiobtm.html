@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="radioMainbtn">
+        <input type="radio" name="gender" id="male" value="male"> <label for="male"> male</label> <br>
+        <input type="radio" name="gender" id="female" value="female"><label for="female"> Female</label> <br>
+
+        <br><br>
+ 
+        <input type="checkbox" name="checkboxed" id="HTML" value="HTML"> <label for="HTML">HTML</label> <br>
+        <input type="checkbox" name="checkboxed" id="CSS" value="CSS"> <label for="CSS">CSS</label> <br>
+        <input type="checkbox" name="checkboxed" id="JS" value="JS"> <label for="JS">JS</label> <br>
+        <input type="checkbox" name="checkboxed" id="ReactJs" value="ReactJs"> <label for="ReactJs">ReactJs</label> <br> <br>
+        <button type="button" onclick="getDetailsRadio()">get Details</button>
+    </div>
+    <script>
+        function getDetailsRadio(){
+            var person  = {
+                gender:"",
+                checkboxed : []
+            }
+            var rename = document.getElementsByName("gender")
+            rename.forEach((element) => {
+                // console.log(details.checked)
+                if(element.checked==true){
+                person.gender = element.value
+                }
+            })
+            var checkedbox1 = document.getElementsByName('checkboxed')
+            checkedbox1.forEach((element2)=>{
+                if(element2.checked){
+                    person.checkboxed.push(element2.value)
+                }
+            })
+            console.log(person)
+        }
+        getDetailsRadio()
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <!-- <script>
+        for(i=1;i<=100;i++){
+
+       var h2Tag = document.createElement("h1")
+       h2Tag.innerHTML=i+" hello world"
+       document.body.appendChild(h2Tag)
+    }
+
+    </script> -->
+
+    <script>
+        var allImage = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Ftamil-nadu-india&psig=AOvVaw3iUqgYzpEdA_18BvYGDNTq&ust=1671789953506000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNC_-YP9jPwCFQAAAAAdAAAAABAI"]
+
+        for(a=0;a<=10;a++){
+
+        for(i=0;i<10;i++){
+            var images1 = document.createElement("img")
+            images1.setAttribute('src',allImage[i]) 
+            // images1.style.width="200px"
+            images1.style.margin="2px"
+            document.body.appendChild(images1)
+
+        }
+    }
+
+    </script>
+    <script>
+        // createing the element
+        var newTable = document.createElement("table")
+        var newTableHeadind = document.createElement("thead")
+        var newTableHead = document.createElement("th")
+        var newTr = document.createElement("tr")
+        var newTr1 = document.createElement("tr")
+        var newTd = document.createElement("td")
+        var newtableBody = document.createElement("tbody")
+
+        // appended the elements
+        document.body.appendChild(newTable)
+        newTable.appendChild(newTableHeadind)
+        newTable.appendChild(newtableBody)
+        newTableHeadind.appendChild(newTr)     
+        newtableBody.appendChild(newTr1)
+        for(a in newTd){
+            var doc = newTr1.appendChild(a)
+            
+        }
+
+       
+
+    </script>
+
+</body>
+</html>

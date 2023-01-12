@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="inputSreach">
+        <input type="text" id="inputSreach" onkeyup="getSreach()">
+    </div>
+    <div id="outputres"></div>
+    <script src="./sreachdata.js"></script>
+    <script>
+        function getSreach(){
+            var Output1 = null
+
+            var inputSreach1 = document.getElementById("inputSreach").value
+            // console.log(inputSreach1)
+            Output1 =studentDetails.find((studentDetails)=>{
+                return studentDetails.name1===inputSreach1;
+            })
+            console.log(Output1)
+            showResult()
+        }
+        function showResult(){
+            if(Output1){
+                var information = ""
+                for(a in Output1){
+                    information+= Output1[a] + "<br>"
+                document.getElementById(outputres).innerHTML=information
+                }
+                
+            }
+            else{
+                document.getElementById(Output1).innerHTML="" 
+            }
+          
+        }
+    </script>
+</body>
+</html>

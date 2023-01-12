@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="name" id="Name1">Name :</label>
+        <input type="text" id="fname" name="Fname" >
+        <button type="button" onclick="submitBtn()">submit</button> <br>
+
+        <label for="">Name :</label>
+        <input type="text" id="fname" name="Fname" class="fname1">
+        <button type="button" onclick="submitBtn2()">submit</button> <br>
+
+        <label for="">Name :</label>
+        <input type="text" id="fname" name="Fname" class="fname1">
+        <button type="button" onclick="submitBtn3()">submit</button> <br>
+
+        <label for="">Name :</label>
+        <input type="text" id="fname" name="Fname" class="fname1">
+        <button type="button" onclick="submitBtn4()">submit</button> <br>
+
+        <label for="">Name :</label>
+        <input type="text" id="fname" name="Fname" class="fname1">
+        <button type="button" onclick="submitBtn5()">submit</button> <br>
+
+        <label for="">Name :</label>
+        <input type="text" id="fname" name="Fname" class="fname1">
+        <button type="button" onclick="submitBtn6()">submit</button>
+    </form>
+
+
+
+    <script>
+        // var student = ["suresh","murali", "tamil","gowtham"]
+
+        // // const varlet = student.filter(function(name1){
+        // //     // console.log(name1)
+        // //     return name1.length==6 
+        // // })
+        // // console.log(varlet)
+        // // document.write(student)
+        // // console.log()
+
+        //     var skLove=student.map((name2)=>{
+        //         return name2+" Friends"
+        //     })
+
+        //     skLove.forEach((name1,i)=>{
+        //         document.write(i+"."+name1+"<br>")
+        //     })
+
+            function submitBtn(){
+                var fname = document.getElementById("fname").value
+                console.log(fname);
+            }
+            function submitBtn2(){
+                var fname2 = document.getElementsByTagName("input")[1].value
+                console.log(fname2);
+            }
+            function submitBtn3(){
+                var fname3 = document.getElementsByName("Fname")[2].value
+                console.log(fname3);
+            }
+            function submitBtn4(){
+                var fname4 = document.getElementsByClassName("fname1")[2].value
+                console.log(fname4);
+            }
+            function submitBtn5(){
+                var fname5 = document.querySelector("#fname")[4].value
+                console.log(fname5);
+            }
+            function submitBtn6(){
+                var fname6 = document.querySelectorAll("input")[5].value
+                console.log(fname6);
+            }
+    </script> 
+
+</body>
+
+</html>

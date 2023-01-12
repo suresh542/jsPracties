@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <div>
+            <label for="">Enter Name :</label>
+            <input type="text" name="" id="inputword" onkeyup="lengthword()">
+            <p style="color: red;">please Enter here in 6 character</p>
+            <button disabled>Add user</button>
+        </div>
+    </form>
+    <script>
+        function lengthword(){
+            var inputLength =document.getElementById("inputword").value
+            if(inputLength.length >= 6){
+                document.querySelector("p").style.display="none"
+                console.log("suresh")
+                document.querySelector("button").removeAttribute("disabled")
+                // seta.setAttribute("disable")
+            }
+            else{
+                document.querySelector("button").setAttribute("disabled",true   )
+                document.querySelector("p").style.display = "block"
+            }
+        }
+        lengthword()
+    </script>
+</body>
+</html>

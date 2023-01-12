@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="fname">First Name :</label>
+        <input type="text" name="" id="fname"><br><br>
+        <label for="lname">last Name :</label>
+        <input type="text" name="" id="lname"><br><br>
+        <label for="email">Email :</label>
+        <input type="text" name="" id="email"><br><br>
+        <label for="city">city Name :</label>
+        <input type="text" name="" id="city"><br><br>
+        <label for="state">State Name :</label>
+        <input type="text" name="" id="state"><br>
+        <br>
+        <button type="button" onclick="getReportedBtn()">get report</button>
+        <br>
+        <br>
+        <table border="1">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>State</th>
+                <th>edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </form>
+    <script>
+        // 1. create user................................................................................................
+        var users1 = JSON.parse(localStorage.getItem("users"))
+        console.log("browser get here", users1)
+        if (users1 == null) {
+            users1 = [];
+        }
+        function getReportedBtn() {
+            var totalIdHere = {
+                fname: "",
+                lname: "",
+                email: "",
+                city: "",
+                state: "",
+            }
+            for (a in totalIdHere) {
+                totalIdHere[a] = document.getElementById(a).value
+            }
+            users1.push(totalIdHere)
+            localStorage.setItem("users", JSON.stringify(users1))
+            // console.log(totalIdHere)
+            pushTableHere()
+            clearFormHere(totalIdHere)
+        }
+        // 2. Read user ..................................................................................................
+        function pushTableHere() {
+            document.querySelector("tbody").innerHTML = ""
+            users1.forEach((user,i) => {
+                var MyTr1 = document.createElement("tr");
+                for (a in user) {
+                    var MyTd1 = document.createElement("td")
+                    MyTd1.innerHTML = user[a]
+                    MyTr1.appendChild(MyTd1)
+                }
+
+                
+                var editTD = document.createElement("td")
+                var delTD = document.createElement("td")
+                MyTr1.appendChild(editTD);
+                MyTr1.appendChild(delTD);
+                var editbtn = document.createElement("button")
+                editbtn.innerHTML = "edit"
+                editbtn.setAttribute("type","button")
+                editbtn.setAttribute("onclick","editUser("+i+")")
+                var delbtn = document.createElement("button")
+                delbtn.innerHTML = "delete"
+                delbtn.setAttribute("type","button")
+                delbtn.setAttribute("onclick","deleteUser("+i+")")
+                editTD.appendChild(editbtn)
+                delTD.appendChild(delbtn)
+
+                document.querySelector("tbody").appendChild(MyTr1)
+            });
+        }
+        pushTableHere();
+        // 3. Update user ......................................................................................................
+        function editUser(i){
+            // console.log("edit"+ " "+i)
+            console.log(users1[i])
+        }
+        // 4. delete user .......................................................................................................
+        function deleteUser(i){
+            // console.log("delete"+ " "+i)
+            users1.splice(i,1)
+            localStorage.setItem("users", JSON.stringify(users1))
+            pushTableHere();
+        }
+        // 5. clear input ........................................................................................................
+        function clearFormHere(totalIdHere) {
+            for (a in totalIdHere) {
+                document.getElementById(a).value = ""
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

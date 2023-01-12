@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="" id="stateId" onchange="getDistricts()">
+        <option value="" selected>Select Option</option>
+    </select>
+    <hr>
+    <ul>
+
+    </ul>
+    <script src="./Statedis.js"></script>
+    <script>
+        var selectedState = {}
+        function displayAllstates() {
+
+            console.log(indianStates);
+            indianStates.forEach(objectDetails => {
+                console.log(objectDetails);
+                
+                var optional1 = document.createElement("option")
+                optional1.setAttribute("value",JSON.stringify(objectDetails))
+                optional1.innerHTML= objectDetails.state
+                document.querySelector("select").appendChild(optional1)
+                
+            });    
+        }
+        function getDistricts(){
+                var States = document.getElementById("stateId").value
+                // console.log(JSON.parse(States))
+                selectedState = JSON.parse(States)
+                displayDistrict()
+            }
+        function displayDistrict(){
+            document.querySelector("ul").innerHTML=""
+            selectedState.districts.forEach((dist)=>{
+                var mylist = document.createElement("li")
+                mylist.innerHTML=dist
+                document.querySelector("ul").appendChild(mylist)
+            })
+        }
+        displayAllstates();
+    </script>
+</body>
+</html> 

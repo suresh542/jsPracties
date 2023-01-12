@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="fname">First Name :</label>
+        <input type="text" name="" id="fname"><br><br>
+        <label for="lname">last Name :</label>
+        <input type="text" name="" id="lname"><br><br>
+        <label for="email">Email :</label>
+        <input type="text" name="" id="email"><br><br>
+        <label for="city">city Name :</label>
+        <input type="text" name="" id="city"><br><br>
+        <label for="state">State Name :</label>
+        <input type="text" name="" id="state"><br>
+        <br>
+        <button type="button" onclick="getReportBtn()" >get report</button>
+        <br>
+        <br>
+        <table border="1">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>State</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </form>
+    <script>
+        var users = JSON.parse(localStorage.getItem("users"));
+        console.log("Browser data",users);
+        if(users == null){
+            users = [];
+        }
+        function getReportBtn(){
+            var user = {
+                fname : "",
+                lname:"",
+                email:"",
+                city:"",
+                state:""    
+            }
+
+            for(a in user){
+                user[a]=document.getElementById(a).value
+            }
+            users.push(user);
+            console.log(user);
+            localStorage.setItem("Users",JSON.stringify(users))
+            detailsShow();
+            clearForm(user);
+        }
+        function detailsShow(){
+            document.querySelector("tbody").innerHTML="";
+            users.forEach((tableRow)=>{
+            var MyTr = document.createElement("tr")
+                for(a in tableRow){
+                var MyTd=document.createElement("td")
+                MyTd.innerHTML = tableRow[a]
+                MyTr.appendChild(MyTd)
+                }
+            document.querySelector("tbody").appendChild(MyTr)
+            });
+        }
+        detailsShow()
+        function clearForm(user){
+            for(a in user){
+                document.getElementById(a).value='';
+            }
+        }
+    </script>
+</body>
+</html>

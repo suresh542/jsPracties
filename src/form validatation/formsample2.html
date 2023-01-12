@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <div>
+            <label for="name12211">
+                First Name :
+            </label>
+            <input type="text" id="name12211" class="sk" placeholder="First Name" onkeyup="getInputInUser()">
+            <p style="color: red;" id="6c"> Please enter 6 character </p> 
+        </div>
+
+        <div>
+            <label for="">Last Name :</label>
+            <input type="text" id="Name12212" placeholder="Last Name" onkeyup="getInputInUser()">
+            <p style="color: red;" id="8c"> Please enter 8 character </p>
+        </div>
+        <div>
+            <label for="">
+
+            </label>
+        </div>
+        <div class="btn">
+            <button disabled>Add User</button>
+        </div>
+    </form>
+    <script>
+        // function getInputInUser(){
+        //     var inputFirstLengths = document.getElementById("name1221").value
+        //     var inputLastLengths = document.getElementById("Name1221").value
+        //     if(inputFirstLengths.length >= 6 && inputLastLengths.length >= 6)
+        //     {
+        //         document.querySelector("p").style.display="none"
+        //         document.querySelector("button").removeAttribute("disabled")
+        //     }
+        //     else
+        //     {
+        //         document.querySelector("p").style.display="block"
+        //         document.querySelector("button").setAttribute("disabled",true)
+        //     }
+        // }
+        // getInputInUser()
+        function getInputInUser(){
+            var person = {
+                fname:document.getElementById("name12211").value,
+                lname:document.getElementById("Name12212").value
+            }
+           
+            if(person.fname.length >= 6)
+            {
+                document.getElementById("6c").style.display = "none"
+            }
+            else
+            {
+                document.getElementById("6c").style.display = "block"
+            }
+            if(person.lname.length >= 8)
+            {
+                document.getElementById("8c").style.display = "none"
+            }
+            else
+            {
+                document.getElementById("8c").style.display = "block"
+            }
+            if(person.fname.length >= 6 && person.lname.length >= 8){
+                document.querySelector("button").removeAttribute("disabled")
+            }
+            else{
+                document.querySelector("button").setAttribute("disabled",true)
+            }
+        }
+    </script>
+</body>
+
+</html>

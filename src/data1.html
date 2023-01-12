@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h1> Normal create the table</h1>
+    <table border=1 width="auto">
+        <thead >
+           <tr>
+            <th>fname</th>
+            <th>lname</th>
+            <th>tel</th>
+            <th>address</th>
+            <th>city</th>
+            <th>state</th>
+            <th>zip</th>
+           </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <br>
+    <br> -->
+    <h1> using loops</h1>
+        <table border=1>
+            <thead >
+               <tr>
+                <th>fname</th>
+                <th>lname</th>
+                <th>tel</th>
+                <th>address</th>
+                <th>city</th>
+                <th>state</th>
+                <th>zip</th>
+                <th>image</th>
+               </tr>
+            </thead>
+            <tbody id="tableBody">
+    
+            </tbody>
+        </table>
+    <script src="./datatable.js"></script>
+    <!-- <script>
+        var myRow = document.createElement("tr")
+        var myTableData1 = document.createElement("td")
+        var myTableData2 = document.createElement("td")
+        var myTableData3 = document.createElement("td")
+        var myTableData4 = document.createElement("td")
+        var myTableData5 = document.createElement("td")
+        var myTableData6 = document.createElement("td")
+        var myTableData7 = document.createElement("td")
+
+        myTableData1.innerHTML=users[0].fname
+        myTableData2.innerHTML=users[0].lname
+        myTableData3.innerHTML=users[0].tel
+        myTableData4.innerHTML=users[0].address
+        myTableData5.innerHTML=users[0].city
+        myTableData6.innerHTML=users[0].state
+        myTableData7.innerHTML=users[0].zip
+
+
+        var mybdy = document.querySelector("tbody").appendChild(myRow)
+
+        myRow.appendChild(myTableData1)
+        myRow.appendChild(myTableData2)
+        myRow.appendChild(myTableData3)
+        myRow.appendChild(myTableData4)
+        myRow.appendChild(myTableData5)
+        myRow.appendChild(myTableData6)
+        myRow.appendChild(myTableData7)
+    </script> -->
+    <script>
+       for(i=0;i<users.length;i++){
+        var myRow = document.createElement("tr")
+       for(a in users[0]){
+        var myTd = document.createElement("td")
+        myTd.innerHTML=users[i][a]
+        myRow.appendChild(myTd)
+       }
+       document.querySelector("tbody").appendChild(myRow)
+       }
+
+    </script>
+</body>
+</html>
