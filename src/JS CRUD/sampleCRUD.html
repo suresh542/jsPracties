@@ -21,7 +21,8 @@
         <label for="state">State Name :</label>
         <input type="text" name="" id="state"><br>
         <br>
-        <button type="button" onclick="getReportedBtn()">get report</button>
+        <button type="button" onclick="getReportedBtn()" id="getReport">get report</button>
+        <button type="button" onclick="UpdateBtn()" id="updateReport" style="display: none;">Update report</button>
         <br>
         <br>
         <table border="1">
@@ -41,6 +42,7 @@
     <script>
         // 1. create user................................................................................................
         var users1 = JSON.parse(localStorage.getItem("users"))
+        var index;
         console.log("browser get here", users1)
         if (users1 == null) {
             users1 = [];
@@ -65,7 +67,10 @@
         // 2. Read user ..................................................................................................
         function pushTableHere() {
             document.querySelector("tbody").innerHTML = ""
-            users1.forEach((user,i) => {
+            users1.forEach((user, i) => {
+                index = i;
+                document.getElementById("getReport").style.display="none"
+            document.getElementById("updateReport").style.display="block"
                 var MyTr1 = document.createElement("tr");
                 for (a in user) {
                     var MyTd1 = document.createElement("td")
@@ -73,19 +78,19 @@
                     MyTr1.appendChild(MyTd1)
                 }
 
-                
+
                 var editTD = document.createElement("td")
                 var delTD = document.createElement("td")
                 MyTr1.appendChild(editTD);
                 MyTr1.appendChild(delTD);
                 var editbtn = document.createElement("button")
                 editbtn.innerHTML = "edit"
-                editbtn.setAttribute("type","button")
-                editbtn.setAttribute("onclick","editUser("+i+")")
+                editbtn.setAttribute("type", "button")
+                editbtn.setAttribute("onclick", "editUser(" + i + ")")
                 var delbtn = document.createElement("button")
                 delbtn.innerHTML = "delete"
-                delbtn.setAttribute("type","button")
-                delbtn.setAttribute("onclick","deleteUser("+i+")")
+                delbtn.setAttribute("type", "button")
+                delbtn.setAttribute("onclick", "deleteUser(" + i + ")")
                 editTD.appendChild(editbtn)
                 delTD.appendChild(delbtn)
 
@@ -93,15 +98,26 @@
             });
         }
         pushTableHere();
+        function UpdateBtn(){
+            
+        }
         // 3. Update user ......................................................................................................
-        function editUser(i){
+        function editUser(i) {
             // console.log("edit"+ " "+i)
             console.log(users1[i])
+            for (a in users1[i]) {
+                document.getElementById(a).value = users1[i][a]
+            }
+            users1[index] = totalIdHere
+            localStorage.setItem("users", JSON.stringify(users1))
+            pushTableHere();
+            clearFormHere(totalIdHere)
+
         }
         // 4. delete user .......................................................................................................
-        function deleteUser(i){
+        function deleteUser(i) {
             // console.log("delete"+ " "+i)
-            users1.splice(i,1)
+            users1.splice(i, 1)
             localStorage.setItem("users", JSON.stringify(users1))
             pushTableHere();
         }
