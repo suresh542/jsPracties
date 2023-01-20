@@ -1,0 +1,6 @@
+Json file open panna Starting la
+
+           npx json-server --watch db.json                  nu kudukanum
+
+
+
