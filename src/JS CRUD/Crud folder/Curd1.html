@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operators</title>
+</head>
+
+<body>
+    <!-- <div>
+        <div class="formlist">
+            <form>
+                <label for="sName">First Name</label>
+                <input type="text" name="" id="sName"><br><br>
+                <label for="eName">Last Name</label>
+                <input type="text" name="" id="eName"><br><br>
+                <button type="button" onclick="addUsers()"> Add Users</button>
+            </form>
+        </div>
+        <br>
+        <hr>
+        <div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Create users
+        // var Users11 = [];
+            function addUsers(){
+                var inputUsers = {
+                    sName : "",
+                    eName  : ""
+                }
+                for ( a in inputUsers){
+                    inputUsers[a]=document.getElementById(a).value
+                }
+                displayUsersHere()
+                var postUsers = new XMLHttpRequest();
+                postUsers.onreadystatechange = ()=>{
+                    if(postUsers.readyState == 4 && postUsers.status == 201){
+                        console.log("User is Created")
+                    }
+                }
+                // Users11.push(inputUsers)
+                postUsers.open("POST","http://localhost:3000/users"),
+                postUsers.setRequestHeader("Content-Type","application/json")
+                postUsers.send(JSON.stringify(inputUsers))
+            }
+        // display user
+            function displayUsersHere(){
+                var getUsers = new XMLHttpRequest();
+                getUsers.onreadystatechange = ()=>{
+                    if(getUsers.readyState == 4 && getUsers.status == 200){
+                        console.log("User is Created")
+                        inputUsers = JSON.parse(getUsers.response)
+                        newTable(inputUsers)
+                    }
+                }
+                getUsers.open("GET","http://localhost:3000/users"),
+                getUsers.send()
+            }
+            function newTable(inputUsers){
+               for(i = 0; i< inputUsers.length;i++){
+                var myTrow = document.createElement("tr")
+                for(a in inputUsers[0]){
+                   var myTData = document.createElement("td")
+                    myTData.innerHTML = inputUsers[i][a]
+                    myTrow.appendChild(myTData)
+                }
+                document.querySelector("tbody").appendChild(myTrow)
+               }
+            }
+            displayUsersHere()
+        // Read users
+        // Update users
+        // Delete users
+    </script> -->
+
+
+
+    <div>
+        <div class="formlist">
+            <form action="">
+                <label for="">First Name : </label>
+                <input type="text" name="" id="fname1"><br><br>
+                <label for="">Last Name : </label>
+                <input type="text" name="" id="lname1"><br><br>
+                <input type="text" name="" id="id" hidden><br><br>
+                <button type="button" onclick="CreateUser()" id="addUserBtn">Add User</button>
+                <button type="button" onclick="UpdateUser()" id="UpdateBtn" style="display: none;">Update</button>
+            </form>
+        </div>
+        <div class="tablelist">
+            <table border="1">
+                <thead>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>id</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        // create user
+        var usersG = []
+        function CreateUser() {
+            var userCreate = {
+                fname1: "",
+                lname1: "",
+                id: ""
+            }
+            for (a in userCreate) {
+                userCreate[a] = document.getElementById(a).value
+            }
+            usersG.push(userCreate)
+
+            var PostApi = new XMLHttpRequest()
+            PostApi.onreadystatechange = () => {
+                if (PostApi.readyState == 4 && PostApi.status == 201) {
+                    console.log("user Created")
+                }
+            }
+            PostApi.open("POST", " http://localhost:3000/users1")
+            PostApi.setRequestHeader("Content-Type", "application/json")
+            PostApi.send(JSON.stringify(userCreate))
+        }
+        // display user
+        function displayAllUserHere() {
+            var getApi = new XMLHttpRequest()
+            getApi.onreadystatechange = () => {
+                if (getApi.readyState == 4 && getApi.status == 200) {
+                    console.log(getApi.response)
+                    usersG = JSON.parse(getApi.response)
+                    displayAllTable(usersG)
+                }
+            }
+            getApi.open("GET", "http://localhost:3000/users1")
+            getApi.send()
+        }
+        function displayAllTable(usersG) {
+            for (i = 0; i < usersG.length; i++) {
+                var tRow = document.createElement("tr")
+                for (a in usersG[0]) {
+                    var tData = document.createElement("td")
+                    tData.innerHTML = usersG[i][a]
+                    tRow.appendChild(tData)
+                }
+
+                var editTd = document.createElement("td")
+                var editTdBtn = document.createElement("button")
+                editTdBtn.innerHTML = "Edit"
+                editTdBtn.setAttribute("onclick", "editBtn(" + i + ")")
+                editTd.appendChild(editTdBtn)
+                tRow.appendChild(editTd)
+
+                var delTd = document.createElement("td")
+                var delTdBtn = document.createElement("button")
+                delTdBtn.innerHTML = "delete"
+                delTdBtn.setAttribute("onclick", "delBtn(" + i + ")")
+                delTd.appendChild(delTdBtn)
+                tRow.appendChild(delTd)
+
+                document.querySelector("tbody").appendChild(tRow)
+            }
+        }
+        displayAllUserHere()
+
+        // Read user
+        function editBtn(i) {
+            for (a in usersG[i]) {
+                document.getElementById("UpdateBtn").value = usersG[i][a]
+            }
+
+            document.getElementById("addUserBtn").style.display = "none"
+            document.getElementById("UpdateBtn").style.display = "block"
+        }
+
+        // Update user
+        function UpdateUser() {
+            var userCreate = {
+                fname1: "",
+                lname1: "",
+                id: ""
+            }
+            for (a in userCreate) {
+                userCreate[a] = document.getElementById(a).value
+            }
+            var postUser = new XMLHttpRequest();
+            postUser.onreadystatechange = () => {
+                if (postUser.readyState == 4 && postUser.status == 200) {
+                    console.log("first")
+                    document.getElementById("addUserBtn").style.display = "block"
+                    document.getElementById("UpdateBtn").style.display = "none"
+                }
+            }
+            postUser.open("PUT", "http://localhost:3000/users1/" + userCreate.id)
+            postUser.setRequestHeader("Content-Type", "application/json")
+            postUser.send(JSON.stringify(userCreate))
+        }
+
+        // delete user
+        function delBtn(i) {
+            var postUser = new XMLHttpRequest()
+            postUser.onreadystatechange = () => {
+                if (postUser.readyState == 4 && postUser.status == 200) {
+                    console.log("a")
+                }
+            }
+            postUser.open("DELETE", "http://localhost:3000/users1/" + usersG[i].id)
+            postUser.send()
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <label for="" class="form-label">User Name : </label>
+            <input type="text" class="form-control" id="userName" placeholder="Enter user Name here"><br>
+
+            <div class="mb-3">
+              <label for="" class="form-label">Password</label>
+              <input type="password" class="form-control" name="" id="userPassword" placeholder="password">
+            </div>
+
+            <button type="button" class="btn btn-outline-primary " onclick="loginBtn()">submit</button>
+            <p class="text-danger text-center" style="display:none" id="invalid">Invalid password || Enter the Correct password</p>
+        </form>
+    </div>
+    
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+     crossorigin="anonymous"></script>
+
+     <script>
+        
+        function loginBtn(){
+            // window.location.href="Dashboard.html"
+            var userLogin = {
+                userName:"",
+                userPassword:""
+            }
+            for(a in userLogin){
+                userLogin[a]=document.getElementById(a).value
+            }
+            var users1 = JSON.parse(localStorage.getItem("users"))
+            let check = users1.find((us)=>{
+               return us.name === userLogin.userName && us.password === userLogin.userPassword
+            })
+
+            if(check){
+                window.location.href="Dashboard.html"
+            }
+            else{
+                document.querySelector("p").style.display="block"
+            }
+
+            console.log(check)
+        }
+    </script>
+
+</body>
+</html>

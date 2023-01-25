@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,17 +14,24 @@
             <form action="">
                 <label for="">First Name</label>
                 <input type="text" name="" id="fname11"><br>
-                <label for="" class="form-label">Last Name</label>
+                <label for="">Last Name</label>
                 <input type="text" name="" id="lname11" placeholder=""><br>
-                <button type="button" class="" onclick="uploadBtnHere()">Upload</button>
+                <input type="text" name="" id="id" hidden>
+                <button type="button" class="" onclick="uploadBtnHere()" id="AddUserBtn">Add user</button>
+                <button type="button" onclick="UploadHere()" style="display: none;" id="UpdateBtn">Upload User</button>
             </form>
             <br>
             <hr>
             <br>
             <table border="1">
                 <thead>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>id</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
@@ -34,29 +41,25 @@
     <script>
         // 1. Create user
         // var users =""
+        var users = []
         function uploadBtnHere() {
             var userInput = {
                 fname11: "",
                 lname11: ""
             }
-            for (a in userInput) { 
-                 userInput[a] = document.getElementById(a).value
+            for (a in userInput) {
+                userInput[a] = document.getElementById(a).value
             }
-            // displayAllTable(userInput)
-            // users= push(userInput)
-            // console.log(userInput)
             var postUser = new XMLHttpRequest()
             postUser.onreadystatechange = function () {
                 if (postUser.status == 201 && postUser.readyState == 4) {
-                    displayAllUser();
                     console.log("Create User")
                 }
-
             }
+            users.push(userInput)
             postUser.open("POST", "http://localhost:3000/userInput")
             postUser.setRequestHeader("Content-Type", "application/json")
             postUser.send(JSON.stringify(userInput))
-
         }
         // 2, Display user
         function displayAllUser() {
@@ -68,27 +71,83 @@
                     displayAllTable(users)
                 }
             }
-            getTheAPI.open("GET", "http://localhost:3000/userInput")
+            var URLGet = "http://localhost:3000/userInput"
+            getTheAPI.open("GET", URLGet)
             // postUser.send(JSON.stringify(userInput))
             getTheAPI.send()
         }
 
         function displayAllTable(users) {
             for (i = 0; i < users.length; i++) {
-                var myTr11 = document.createElement("tr")
+                var myTrow1 = document.createElement("tr")
                 for (a in users[0]) {
-                    var tdTable = document.createElement("td")
-                    myTr11.innerHTML = users[i][a]
-                    myTr11.appendChild[tdTable]
+                    var myTData = document.createElement("td")
+                    myTData.innerHTML = users[i][a]
+                    myTrow1.appendChild(myTData)
                 }
-                document.querySelector("tbody").appendChild(myTr11)
+                var newTdEdit = document.createElement("td")
+                var newTdEditBtn = document.createElement("button")
+                newTdEditBtn.innerHTML = "Edit"
+                newTdEditBtn.setAttribute("onclick", "editUser(" + i + ")")
+                newTdEdit.appendChild(newTdEditBtn)
+                myTrow1.appendChild(newTdEdit)
+
+                var newTdDelete = document.createElement("td")
+                var newTdDeleteBtn = document.createElement("button")
+                newTdDeleteBtn.innerHTML = "Delete"
+                newTdDeleteBtn.setAttribute("onclick", "deleteUser(" + i + ")")
+                newTdDelete.appendChild(newTdDeleteBtn)
+                myTrow1.appendChild(newTdDelete)
+
+                document.querySelector("tbody").appendChild(myTrow1)
             }
         }
         displayAllUser()
-    // 3. Read user
-    // 4. update user
+        // 3. Read user
+        function editUser(i) {
+
+            for (a in users[i]) {
+                document.getElementById(a).value = users[i][a]
+            }
+            document.getElementById("AddUserBtn").style.display = "none";
+            document.getElementById("UpdateBtn").style.display = "block";
+        }
+
+        // 4. update user
+        function UploadHere() {
+            var userInput = {
+                fname11: "",
+                lname11: "",
+                id: ""
+            }
+            for (a in userInput) {
+                userInput[a] = document.getElementById(a).value
+            }
+            var postUser = new XMLHttpRequest()
+            postUser.onreadystatechange = function () {
+                if (postUser.status == 200 && postUser.readyState == 4) {
+                    console.log("Create User")
+                    document.getElementById("AddUserBtn").style.display = "block";
+                    document.getElementById("UpdateBtn").style.display = "none"
+                }
+            }
+            // users.push(userInput)
+            postUser.open("PUT", "http://localhost:3000/userInput/"+ userInput.id)
+            postUser.setRequestHeader("Content-Type", "application/json")
+            postUser.send(JSON.stringify(userInput))
+        }
     // 5.delete user
+        function deleteUser(i){
+            var postUser = new XMLHttpRequest()
+            postUser.onreadystatechange = function () {
+                if (postUser.status == 200 && postUser.readyState == 4) {
+                    console.log("Deleted User Successfully")
+                }
+            }
+            postUser.open("DELETE", "http://localhost:3000/userInput/"+ users[i].id)
+            postUser.send()
+        }
     </script>
 </body>
 
-</html>
+</html> -->
